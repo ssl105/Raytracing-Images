@@ -42,3 +42,24 @@ The images below focus on direct lighting from area light sources. Direct lighti
 ![image11](images/hw2/cornell.png)
 
 ![image12](images/hw2/dragon.png)
+
+## Indirect Lighting
+
+![image13](images/hw3/cornellSimple.png)
+
+![image14](images/hw3/cornellNE.png)
+
+![image15](images/hw3/cornellRR.png)
+
+![image16](images/hw3/dragon.png)
+
+## Importance Sampling
+
+![image17](images/hw4/cornellCosine.png)
+
+![image18](images/hw4/cornellBRDF.png)
+
+![image19](images/hw4/mis.png)
+
+![image20](images/hw4/dragon.png)
+
