@@ -47,7 +47,7 @@ The images below focus on direct lighting from area light sources. Direct lighti
 
 ![image13](images/hw3/cornellSimple.png)
 
-![image14](images/hw3/cornellNE.png)
+![image14](images/hw3/cornellNEE.png)
 
 ![image15](images/hw3/cornellRR.png)
 
