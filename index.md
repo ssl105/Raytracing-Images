@@ -59,6 +59,8 @@ The images below focus on direct lighting from area light sources. Direct lighti
 
 ![image18](images/hw4/cornellBRDF.png)
 
+![image19](images/hw4/ggx.png)
+
 ![image19](images/hw4/mis.png)
 
 ![image20](images/hw4/dragon.png)
