@@ -92,10 +92,14 @@ Returning back to BRDF sampling with our modified phong BRDF, we can improve rea
 **BRDF:**
 ![image20](images/hw4/mis_brdf.png)
 
-We can combine both these sampling methods, NEE and BRDF, so that BRDF is emphasized on reflective portions of the scene and NEE is emphasized everywhere else. This method is called multiple importance sampling and is simpler in theory, but much more difficult to implement.
+We can combine both these sampling methods, NEE and BRDF, so that BRDF is emphasized on reflective portions of the scene and NEE is emphasized everywhere else. This method is called multiple importance sampling(MIS) and is simpler in theory, but much more difficult to implement.
 
-The image below uses multiple importance sampling to combine both NEE and BRDF sampling methods.   
+The image below uses MIS to combine both NEE and BRDF sampling methods.   
 ![image21](images/hw4/mis.png)
 
-
+Here is a scene of the stanford dragon again using MIS and russian roulette. 
 ![image22](images/hw4/dragon.png)
+
+# Acknowledgments
+
+The images shown here are produced for the homework assignments of CSE 168 at UCSD Fall 2021 taught by Professor Ravi Ramamoorthi.
