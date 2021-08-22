@@ -89,7 +89,7 @@ Returning back to BRDF sampling with our modified phong BRDF, we can improve rea
 **NEE:**    
 ![image19](images/hw4/mis_nee.png)
     
-**BRDF:**
+**BRDF:**    
 ![image20](images/hw4/mis_brdf.png)
 
 We can combine both these sampling methods, NEE and BRDF, so that BRDF is emphasized on reflective portions of the scene and NEE is emphasized everywhere else. This method is called multiple importance sampling(MIS) and is simpler in theory, but much more difficult to implement.
