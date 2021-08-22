@@ -77,7 +77,7 @@ The image below renders the scene using samples from a cosine distribution. This
 
 The cosine sampling will still be very noisy depending on the materials used in the scene as show above. To reduce the noise in the image we need to consider the diffuse and specular components of objects in the scene.
 
-The image below uses BRDF(bidirectional reflectance distribution function) sampling based on our modified phong BRDF(the formula that ultimately determines the color of the surface). The random samples will centered around the perfect reflected ray for more reflective surfaces. Otherwise, samples are centered around the normal for diffuse surfaces.   
+The image below uses BRDF(bidirectional reflectance distribution function) sampling based on our modified phong BRDF(the formula that ultimately determines the color of the surface). The random samples are centered around the perfect reflected ray for more reflective surfaces and samples are centered around the normal for more diffuse surfaces.   
 ![image18](images/hw4/cornellBRDF.png)
 
 The image below uses similar BRDF to the modified phong used above, but improves further on the realism. The method is called GGX BRDF which is currently used animation, VFX, and the gaming industry to accurately visualize specular reflections. GGX improves in realism by considering the microfacet nature of surfaces(surfaces are not completely smooth). GGX also improves upon reflections through a Fresnel reflection component. Fresnel reflections are the effect when surfaces tend to reflect more at grazing angles(when the viewing direction becomes more parallel with the surface).
