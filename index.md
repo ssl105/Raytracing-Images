@@ -85,7 +85,7 @@ The image below uses similar BRDF to the modified phong used above, but improves
 
 
 ### Multiple Importance Sampling
-Returning back to BRDF sampling with our modified phong BRDF, we can improve realism with our reflections by combining both NEE and BRDF importance sampling methods. Earlier we mentioned how NEE uses indirect sampling aka BRDF sampling to determine the next direction for the ray. Let BRDF importance sampling refer to the first indirect lighting method we used where color was only produced when a ray hits a light source. There are merits to both methods. The benefit to NEE is that it produces noise free images for most of the image but fails for more reflective surfaces. In contrast, BRDF importance sampling handles reflective surfaces better than NEE, but is very noisy everywhere else.
+Returning back to BRDF sampling with our modified phong BRDF, we can improve realism with our reflections by combining both NEE and BRDF importance sampling methods. Earlier we mentioned how NEE uses indirect sampling aka BRDF sampling to determine the next direction for the ray. Let BRDF importance sampling refer to the first indirect lighting method we used where color was only produced when a ray hits a light source. There are merits to both methods. The benefit to NEE is that it produces noise free images for most of the image but fails for more reflective surfaces. In contrast, BRDF importance sampling handles reflective surfaces better than NEE, but is very noisy everywhere else.    
 **NEE:**    
 ![image19](images/hw4/mis_nee.png)
     
