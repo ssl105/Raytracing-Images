@@ -57,7 +57,7 @@ Since raytracing and pathtracing rays usually start from the camera or the eye, 
 The image below samples 64 rays per pixel with a maximum depth of 5. For every bounce, the next direction of the ray is determined randomly and uniformly from the hemisphere (uniform hemisphere sampling). Even though we are sampling many rays per pixel, our shading equation only produces color if the rays hit the light so the image still remains noisy.   
 ![image13](images/hw3/cornellSimple.png)
 
-To reduce the noise in the previous image we can combine direct and indirect lighting. At each bounce we calculate the direct lighting contribution to the color and use uniform hemisphere sampling to determine the next direction of the ray which acts as our indirect lighting component. This method is called next event estimation. For direct lighting we only sample once unstratified from the area light since it produces adequate results.    
+To reduce the noise in the previous image we can combine direct and indirect lighting. At each bounce we calculate the direct lighting contribution to the color and use uniform hemisphere sampling to determine the next direction of the ray which acts as our indirect lighting component. This method is called next event estimation(NEE). For direct lighting we only sample once unstratified from the area light since it produces adequate results.    
 ![image14](images/hw3/cornellNEE.png)
 
 Up to this point, all of the images have been rendered with a maximum depth for each ray. This reduces accurarcy since rays are terminated prematurely. To fix this we can use a method called russian roulette. This randomly terminates rays based on how much energy they have. Rays with lower energy are more likely to be terminated than rays with high energy. To compensate for the random termination of rays, a boosting factor is necessary for surving rays. This boosting factor increases the longevity of high energy rays and accelerates the termination of low energy rays. 
@@ -72,13 +72,30 @@ Here is the stanford dragon rendered with next event estimation and russian roul
 
 So far after each bounce of a ray we have been taking a uniform sample from the hemisphere to use as the next direction for the ray. We can produce better images if we change the way we sample the next direction of the ray.
 
+The image below renders the scene using samples from a cosine distribution. This means that randomly sampled directions for each bounce will be sampled closer to the normal of the surface.   
 ![image17](images/hw4/cornellCosine.png)
 
+The cosine sampling will still be very noisy depending on the materials used in the scene as show above. To reduce the noise in the image we need to consider the diffuse and specular components of objects in the scene.
+
+The image below uses BRDF(bidirectional reflectance distribution function) sampling based on our modified phong BRDF(the formula that ultimately determines the color of the surface). The random samples will centered around the perfect reflected ray for more reflective surfaces. Otherwise, samples are centered around the normal for diffuse surfaces.   
 ![image18](images/hw4/cornellBRDF.png)
 
+The image below uses similar BRDF to the modified phong used above, but improves further on the realism. The method is called GGX BRDF which is currently used animation, VFX, and the gaming industry to accurately visualize specular reflections. GGX improves in realism by considering the microfacet nature of surfaces(surfaces are not completely smooth). GGX also improves upon reflections through a Fresnel reflection component. Fresnel reflections are the effect when surfaces tend to reflect more at grazing angles(when the viewing direction becomes more parallel with the surface).
 ![image19](images/hw4/ggx.png)
 
-![image19](images/hw4/mis.png)
 
-![image20](images/hw4/dragon.png)
+### Multiple Importance Sampling
+Returning back to BRDF sampling with our modified phong BRDF, we can improve realism with our reflections by combining both NEE and BRDF importance sampling methods. Earlier we mentioned how NEE uses indirect sampling aka BRDF sampling to determine the next direction for the ray. Let BRDF importance sampling refer to the first indirect lighting method we used where color was only produced when a ray hits a light source. There are merits to both methods. The benefit to NEE is that it produces noise free images for most the image but fails for more reflective surfaces. In contrast, BRDF importance sampling handles reflective surfaces better than NEE, but is very noisy everywhere else.
+**NEE:**    
+![image19](images/hw4/mis_nee.png)
+    
+**BRDF:**
+![image20](images/hw4/mis_brdf.png)
 
+We can combine both these sampling methods, NEE and BRDF, so that BRDF is emphasized on reflective portions of the scene and NEE is emphasized everywhere else. This method is called multiple importance sampling and is simpler in theory, but much more difficult to implement.
+
+The image below uses multiple importance sampling to combine both NEE and BRDF sampling methods.   
+![image21](images/hw4/mis.png)
+
+
+![image22](images/hw4/dragon.png)
