@@ -29,7 +29,7 @@ The difference between a pathtracer and a raytracer is that a pathtracer can sho
 
 ## Direct Lighting
 
-The images below focus on direct lighting from area light sources. Direct lighting involves two rays and one bounce. The first ray is drawn through a pixel from the camera/eye to some point in the scene. Then the ray bounces and another is theoretically drawn to the light source. Since we are dealing with an area light source, realistically the secodn ray could land anywhere with the light source. So to model this accurately, we can sample random points from the light source to draw our second ray. 
+The images below focus on direct lighting from area light sources. Direct lighting involves two rays and one bounce. The first ray is drawn through a pixel from the camera/eye to some point in the scene. Then the ray bounces which means that another ray drawn to the light source. Since we are dealing with an area light source, realistically the second ray could land anywhere with the light source. So to model this accurately, we can sample random points from the light source to draw our second ray. 
 
 The image below is rendered by using an analytical solution for quad light sources. There is no noise in the image, but analytical solution cannot be used in general since it does not consider shadows. For this project is used to create a reference image.   
 ![image7](images/hw2/analytic.png)
@@ -50,7 +50,13 @@ Here are some more images rendered with accurate physics-based direct lighting u
 
 ## Indirect Lighting
 
+The images below focus on incorporating indirect lighting. Direct lighting is not sufficient in producing realistic images because light does not always bounce from the surface into the camera/eye. Light could bounce from several surfaces before ultimately reaching the eye. Because of this, we want to do random sampling to generate a new ray for each bounce. 
+
+Since raytracing and pathtracing rays usually start from the camera or the eye, we do not necessarily know when it will hit a light source. Furthermore, for indirect lighting to work, a ray needs to eventually hit the light. If we have defined max depth or maximum bounces per generated ray, it means that an image will most likely never reach a light source and produce a colorless image. Inorder to increase the probability of hitting a light source, we can increase the number of rays we shoot through a pixel and take the average resulting color. This will also help smooth out jagged edges (aliasing). 
+
+The image below samples 64 rays per pixel with a maximum depth of 5. For every bounce, the next ray is determined randomly and uniformly from the hemisphere (uniform hemisphere sampling).   
 ![image13](images/hw3/cornellSimple.png)
+
 
 ![image14](images/hw3/cornellNEE.png)
 
