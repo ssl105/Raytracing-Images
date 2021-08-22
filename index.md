@@ -54,14 +54,18 @@ The images below focus on incorporating indirect lighting. Direct lighting is no
 
 Since raytracing and pathtracing rays usually start from the camera or the eye, we do not necessarily know when it will hit a light source. Furthermore, for indirect lighting to work, a ray needs to eventually hit the light. If we have defined max depth or maximum bounces per generated ray, it means that an image will most likely never reach a light source and produce a colorless image. Inorder to increase the probability of hitting a light source, we can increase the number of rays we shoot through a pixel and take the average resulting color. This will also help smooth out jagged edges (aliasing). 
 
-The image below samples 64 rays per pixel with a maximum depth of 5. For every bounce, the next ray is determined randomly and uniformly from the hemisphere (uniform hemisphere sampling).   
+The image below samples 64 rays per pixel with a maximum depth of 5. For every bounce, the next ray is determined randomly and uniformly from the hemisphere (uniform hemisphere sampling). Even though we are sampling many rays per pixel, our shading equation only produces color if the rays hit the light so the image still remains noisy.
 ![image13](images/hw3/cornellSimple.png)
 
-
+To reduce the noise in the previous image we can combine direct and indirect lighting. At each bounce we calculate the direct lighting contribution to the color and use uniform hemisphere sampling to determine the next ray which acts as our indirect lighting component. This method is called next event estimation. For direct lighting we only sample once unstratified from the area light since it produces adequate results.    
 ![image14](images/hw3/cornellNEE.png)
 
+Up to this point, all of the images have been rendered with a maximum depth for each ray. This reduces accurarcy since rays are terminated prematurely. To fix this we can use a method called russian roulette. This randomly terminates rays based on how much energy they have. Rays with lower energy are more likely to be terminated than rays with high energy. To compensate for the random termination of rays, a boosting factor is necessary for surving rays. This boosting factor increases the longevity of high energy rays and accelerates the termination of low energy rays. 
+
+The image belows is rendered with russian roulette and no maximum depth for rays. The image is brighter since more rays ultimately survive.   
 ![image15](images/hw3/cornellRR.png)
 
+Here is the stanford dragon rendered with next event estimation and russian roulette.   
 ![image16](images/hw3/dragon.png)
 
 ## Importance Sampling
